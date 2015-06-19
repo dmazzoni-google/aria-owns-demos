@@ -1,0 +1,114 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Aria-owns demos</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <!-- JavaScript code prettifier -->
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+
+    <style>
+      .btn {
+        width: 200px;
+      }
+    </style>
+
+  </head>
+  <body>
+    <div class="container" role="main">
+      <div class="jumbotron">
+        <h1>Aria-owns demos</h1>
+        <p>
+          This page demonstrates support for
+          <a href="http://www.w3.org/TR/wai-aria/states_and_properties#aria-owns">aria-owns</a>
+          in Google Chrome 35.
+        </p>
+        <p>
+          The aria-owns property has been part of the ARIA spec for a long
+          time, but historically, implementation has relied on AT support,
+          which can be difficult and expensive to get right. Starting in
+          version 35, Google Chrome implements aria-owns by automatically
+          rearranging the accessibility tree.
+        </p>
+      </div>
+      <h2>Moving nodes in the accessibility tree</h2>
+      <p>
+        The most basic use of aria-owns is to move a node in the accessibility
+        tree. In this example, there are three profile images in a row, and
+        immediately below each image is a button to open the profile.
+        In the DOM, the three images come first and the three buttons
+        come next, so the semantic order in the accessibility tree is wrong.
+        With aria-owns we can move the buttons in the accessibility tree
+        without affecting the DOM tree.
+      </p>
+
+      <pre>
+<xmp class="prettyprint">      <div>
+        <img src="redthumb.png" alt="Red profile">
+        <span aria-owns="redbutton"></span>
+        <img src="greenthumb.png" alt="Green profile">
+        <span aria-owns="greenbutton"></span>
+        <img src="bluethumb.png" alt="Blue profile">
+        <span aria-owns="bluebutton"></span>
+      </div>
+      <div>
+        <button id="redbutton">Red profile</button>
+        <button id="greenbutton">Green profile</button>
+        <button id="bluebutton">Blue profile</button>
+      </div></xmp></pre>
+
+      <h3>Without aria-owns</h3>
+      <div>
+        <img class="img-thumbnail" src="redthumb.png" alt="Red profile" width="200px">
+        <img class="img-thumbnail" src="greenthumb.png" alt="Green profile" width="200px">
+        <img class="img-thumbnail" src="bluethumb.png" alt="Blue profile" width="200px">
+      </div>
+      <div>
+        <button class="btn btn-lg btn-danger">Red profile</button>
+        <button class="btn btn-lg btn-success">Green profile</button>
+        <button class="btn btn-lg btn-primary">Blue profile</button>
+      </div>
+
+      <h3>With aria-owns</h3>
+      <div>
+        <img class="img-thumbnail" src="redthumb.png" alt="Red profile" width="200px">
+        <span aria-owns="redbutton"></span>
+        <img class="img-thumbnail" src="greenthumb.png" alt="Green profile" width="200px">
+        <span aria-owns="greenbutton"></span>
+        <img class="img-thumbnail" src="bluethumb.png" alt="Blue profile" width="200px">
+        <span aria-owns="bluebutton"></span>
+      </div>
+      <div>
+        <button id="redbutton" class="btn btn-lg btn-danger">Red profile</button>
+        <button id="greenbutton" class="btn btn-lg btn-success">Green profile</button>
+        <button id="bluebutton" class="btn btn-lg btn-primary">Blue profile</button>
+      </div>
+
+      <h2>Reorder children</h2>
+      <p>
+
+      </p>
+      <pre>
+        foo
+        bar</pre>
+
+      <h2>Build a list</h2>
+      <ul class="list-group">
+      </ul>
+      <li class="list-group-item">Item One</li>
+      <li class="list-group-item">Item Two</li>
+
+      <h2>Build a table</h2>
+      <h2>Build a table</h2>
+    </div>
+
+  </body>
+</html>
