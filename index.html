@@ -19,6 +19,16 @@
       .btn {
         width: 200px;
       }
+
+      [role="row"] {
+        border-collapse: collapse;
+        margin-top: -1px;
+      }
+      [role="gridcell"] {
+        display: table-cell;
+        border: 1px solid #ddd;
+        padding: 10px 15px;
+      }
     </style>
 
   </head>
@@ -118,22 +128,92 @@
         <button id="bluebutton" class="btn btn-lg btn-primary">Blue profile</button>
       </div>
 
-      <h2>Reorder children</h2>
+      <h2>Reordering children</h2>
       <p>
-
+        Another use of aria-owns is to keep the existing children of an HTML element,
+        but simply reorder them so that it makes more sense for accessibility.
+        In this example, the DOM order is backwards, but using aria-owns, the
+        accessibility tree will have the list items in the correct order.
       </p>
       <pre>
-        foo
-        bar</pre>
+<xmp class="prettyprint">      <ul aria-owns="first second third">
+        <li id="third">Third</li>
+        <li id="second">Second</li>
+        <li id="first">First</li>
+      </ul></xmp></pre>
 
-      <h2>Build a list</h2>
+      <h3>Without aria-owns</h3>
       <ul class="list-group">
+        <li class="list-group-item">Third</li>
+        <li class="list-group-item">Second</li>
+        <li class="list-group-item">First</li>
       </ul>
-      <li class="list-group-item">Item One</li>
-      <li class="list-group-item">Item Two</li>
 
-      <h2>Build a table</h2>
-      <h2>Build a table</h2>
+      <h3>With aria-owns</h3>
+      <ul class="list-group" aria-owns="first second third">
+        <li id="third" class="list-group-item">Third</li>
+        <li id="second" class="list-group-item">Second</li>
+        <li id="first" class="list-group-item">First</li>
+      </ul>
+
+      <h2>Building a list</h2>
+
+      <p>Another use of aria-owns is to construct an ARIA list when there isn't
+      a suitable container element as the parent of the list items.</p>
+
+      <h3>Without aria-owns</h3>
+      <div role="list" class="list-group"></div>
+      <div role="listitem" class="list-group-item">Item One</div>
+      <div role="listitem" class="list-group-item">Item Two</div>
+
+      <h3>With aria-owns</h3>
+      <div role="list" class="list-group" aria-owns="item1 item2"></div>
+      <div id="item1" role="listitem" class="list-group-item">Item One</div>
+      <div id="item2" role="listitem" class="list-group-item">Item Two</div>
+
+      <h2>Building a grid</h2>
+
+      <p>Similarly aria-owns can be used to construct an ARIA grid.</p>
+
+      <pre>
+<xmp class="prettyprint">      <div role="grid" aria-owns="row1 row2"></div>
+      <div id="row1" role="row">
+        <div role="gridcell">Cell 1, 1</div>
+        <div role="gridcell">Cell 1, 2</div>
+        <div role="gridcell">Cell 1, 3</div>
+      </div>
+      <div id="row2" role="row">
+        <div role="gridcell">Cell 2, 1</div>
+        <div role="gridcell">Cell 2, 2</div>
+        <div role="gridcell">Cell 2, 3</div>
+      </div></xmp></pre>
+
+      <h3>Without aria-owns</h3>
+      <div role="grid"></div>
+      <div role="row">
+        <div role="gridcell">Cell 1, 1</div>
+        <div role="gridcell">Cell 1, 2</div>
+        <div role="gridcell">Cell 1, 3</div>
+      </div>
+      <div role="row">
+        <div role="gridcell">Cell 2, 1</div>
+        <div role="gridcell">Cell 2, 2</div>
+        <div role="gridcell">Cell 2, 3</div>
+      </div>
+
+      <h3>With aria-owns</h3>
+      <div role="grid" aria-owns="row1 row2"></div>
+      <div id="row1" role="row">
+        <div role="gridcell">Cell 1, 1</div>
+        <div role="gridcell">Cell 1, 2</div>
+        <div role="gridcell">Cell 1, 3</div>
+      </div>
+      <div id="row2" role="row">
+        <div role="gridcell">Cell 2, 1</div>
+        <div role="gridcell">Cell 2, 2</div>
+        <div role="gridcell">Cell 2, 3</div>
+      </div>
+
     </div>
 
   </body>
