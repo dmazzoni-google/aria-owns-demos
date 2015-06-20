@@ -161,6 +161,11 @@
       <p>Another use of aria-owns is to construct an ARIA list when there isn't
       a suitable container element as the parent of the list items.</p>
 
+      <pre>
+<xmp class="prettyprint">      <div role="list" class="list-group" aria-owns="item1 item2"></div>
+      <div id="item1" role="listitem" class="list-group-item">Item One</div>
+      <div id="item2" role="listitem" class="list-group-item">Item Two</div></xmp></pre>
+
       <h3>Without aria-owns</h3>
       <div role="list" class="list-group"></div>
       <div role="listitem" class="list-group-item">Item One</div>
@@ -213,6 +218,50 @@
         <div role="gridcell">Cell 2, 2</div>
         <div role="gridcell">Cell 2, 3</div>
       </div>
+
+      <h2>Dynamic changes</h2>
+
+      <p>Aria-owns should work correctly if aria-owns is dynamically added
+         to an element.</p>
+
+      <button id="own" class="btn btn-lg btn-danger">Add aria-owns to list</button>
+      <div id="dynlist" role="list" class="list-group"></div>
+      <div id="dynitem1" role="listitem" class="list-group-item">Item One</div>
+      <div id="dynitem2" role="listitem" class="list-group-item">Item Two</div>
+
+      <script>
+        document.getElementById("own").addEventListener("click", function() {
+          document.getElementById("dynlist").setAttribute("aria-owns", "dynitem1 dynitem2");
+          document.getElementById("own").disabled = true;
+        });
+      </script>
+
+      <p>Aria-owns should work correctly if aria-owns references an element it
+         that's not on the page, and it later gets added.</p>
+
+      <div>
+        <button id="add" class="btn btn-lg btn-danger">Add owned elements</button>
+        <div id="dynlistb" role="list" class="list-group" aria-owns="dynitemb1 dynitemb2"></div>
+        <div id="dynitemb1" role="listitem" class="list-group-item">Item One</div>
+      </div>
+
+      <script>
+        document.getElementById("add").addEventListener("click", function() {
+          var parent = document.getElementById("dynlistb").parentElement;
+          var child = document.createElement("div");
+          child.id = "dynitemb2";
+          child.className = "list-group-item";
+          child.setAttribute("role", "listitem");
+          child.textContent = "Item Two";
+          parent.appendChild(child);
+          document.getElementById("add").disabled = true;
+        });
+      </script>
+
+      <h2>References</h2>
+
+      <a href="http://www.w3.org/TR/wai-aria/states_and_properties#aria-owns">aria-owns</a>
+      in the ARIA spec.
 
     </div>
 
