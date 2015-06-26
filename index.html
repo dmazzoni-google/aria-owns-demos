@@ -52,11 +52,15 @@
 
       <div id="version-alert" class="alert alert-danger" role="alert">
         <p>
-          <strong>Oops! You're not using Google Chrome 45 or higher.</strong>
+          <strong>Oops! The browser you're using isn't a new enough version of Google Chrome.</strong>
         </p>
         <p>
           Your user agent is:
           <span id="useragent"></span>.
+        </p>
+        <p>
+          The Chrome version should be 45, and the branch number (the third
+          number in the version string) should be 2441 or higher.
         </p>
         <p>
           You're still welcome to check out this
@@ -65,8 +69,9 @@
       </div>
       <script>
         document.getElementById("useragent").textContent = navigator.userAgent;
-        var m = navigator.userAgent.match(/Chrome\/([0-9]+)/);
-        if (m && parseInt(m[1], 10) >= 45) {
+        var m = navigator.userAgent.match(/Chrome\/([0-9]+)\.[0-9]+\.([0-9]+)/);
+        console.log('Version: ' + m[1] + ' : ' + m[2]);
+        if (m && parseInt(m[1], 10) >= 45 && parseInt(m[2], 10) >= 2441) {
           document.getElementById('version-alert').hidden = true;
         }
       </script>
@@ -236,7 +241,8 @@
         });
       </script>
 
-      <p>Aria-owns should work correctly if aria-owns references an element it
+      <p style="margin-top: 1em">
+         Aria-owns should also work correctly if aria-owns references an element it
          that's not on the page, and it later gets added.</p>
 
       <div>
@@ -260,8 +266,10 @@
 
       <h2>References</h2>
 
+      <p style="margin-bottom: 2em;">
       <a href="http://www.w3.org/TR/wai-aria/states_and_properties#aria-owns">aria-owns</a>
       in the ARIA spec.
+      </p>
 
     </div>
 
