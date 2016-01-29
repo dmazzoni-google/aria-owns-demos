@@ -39,42 +39,16 @@
         <p>
           This page demonstrates support for
           <a href="http://www.w3.org/TR/wai-aria/states_and_properties#aria-owns">aria-owns</a>
-          in Google Chrome 45.
+          in Google Chrome and Mozilla Firefox.
         </p>
         <p>
           The aria-owns property has been part of the ARIA spec for a long
           time, but historically, implementation has relied on AT support,
-          which can be difficult and expensive to get right. Starting in
-          version 45, Google Chrome implements aria-owns by automatically
-          rearranging the accessibility tree.
+          which can be difficult and expensive to get right. Google Chrome
+          and Mozilla Firefox both implement aria-owns by automatically
+          rearranging the accessibility tree now.
         </p>
       </div>
-
-      <div id="version-alert" class="alert alert-danger" role="alert">
-        <p>
-          <strong>Oops! The browser you're using isn't a new enough version of Google Chrome.</strong>
-        </p>
-        <p>
-          Your user agent is:
-          <span id="useragent"></span>.
-        </p>
-        <p>
-          The Chrome version should be 45, and the branch number (the third
-          number in the version string) should be 2441 or higher.
-        </p>
-        <p>
-          You're still welcome to check out this
-          page, but the aria-owns examples probably won't work!
-        </p>
-      </div>
-      <script>
-        document.getElementById("useragent").textContent = navigator.userAgent;
-        var m = navigator.userAgent.match(/Chrome\/([0-9]+)\.[0-9]+\.([0-9]+)/);
-        console.log('Version: ' + m[1] + ' : ' + m[2]);
-        if (m && parseInt(m[1], 10) >= 45 && parseInt(m[2], 10) >= 2441) {
-          document.getElementById('version-alert').hidden = true;
-        }
-      </script>
 
       <h2>Moving nodes in the accessibility tree</h2>
       <p>
