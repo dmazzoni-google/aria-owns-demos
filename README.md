@@ -1,9 +1,9 @@
 # aria-owns-demos
-Demos of support for aria-owns in Google Chrome 45.
+Demos of support for aria-owns in Google Chrome and Firefox.
 By Dominic Mazzoni.
 
 Released under the terms of the Apache License 2.0.
 
 To view the demos, visit:
 
-http://dmazzoni-google.github.io/aria-owns-demos
+http://minorninth.github.io/aria-owns-demos
